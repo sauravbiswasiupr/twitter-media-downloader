@@ -6,19 +6,17 @@ called `.credentials.json` with entries for the attributes `consumer_key` and `c
 of the json file. Alternatively if these attributes are present in the environment, the script 
 will attempt to load them from the env. If both possibilites don't exist, then the script will fail.
 
-Requirements
+Installation
 ------------
 
-Install tweepy
-
-`pip install tweepy`
+`pip install twitter-media-downloader`
 
 Usage
 -----
 
+
 ```
-python twitter_media_downloader.py -h
-usage: twitter_media_downloader.py [-h] [--key KEY] [--secret SECRET]
+usage: twitter_media_dl [-h] [--key KEY] [--secret SECRET]
                                    [--account ACCOUNT] [--limit LIMIT]
                                    [--scrape-link] [--threaded]
 
@@ -34,4 +32,4 @@ optional arguments:
 Examples
 --------
 
-`python twitter_media_downloader.py --account catsofinstagram --limit 100  --threaded`
+`twitter_media_dl --account catsofinstagram --limit 100  --threaded`
