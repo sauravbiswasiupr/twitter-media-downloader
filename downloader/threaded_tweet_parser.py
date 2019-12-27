@@ -1,5 +1,5 @@
 from concurrent.futures.thread import ThreadPoolExecutor
-from base_tweet_parser import BaseTweetParser
+from .base_tweet_parser import BaseTweetParser
 
 
 class ThreadedTweetParser(BaseTweetParser):

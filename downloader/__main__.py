@@ -3,19 +3,20 @@ import os
 from argparse import ArgumentParser
 from time import time
 
-from base_tweet_parser import BaseTweetParser
-from threaded_tweet_parser import ThreadedTweetParser
+from .base_tweet_parser import BaseTweetParser
+from .threaded_tweet_parser import ThreadedTweetParser
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
 
-if __name__ == "__main__":
+def main():
     arg_parser = ArgumentParser()
     arg_parser.add_argument("--account", type=str, help="Twitter account handle", default="funnycat96")
     arg_parser.add_argument("--limit", type=int, default=3200, help="Number of media urls to download")
     arg_parser.add_argument("--scrape-link", dest="scrape", help="Store scraped links to file",
                             action='store_true')
-    arg_parser.add_argument("--threaded", help="Use a threaded approach to download media. By default spawns 10 threads",
+    arg_parser.add_argument("--threaded",
+                            help="Use a threaded approach to download media. By default spawns 10 threads",
                             action="store_true")
     args = arg_parser.parse_args()
     if args.threaded:
@@ -23,9 +24,7 @@ if __name__ == "__main__":
         parser = ThreadedTweetParser(64)
     else:
         parser = BaseTweetParser()
-
     parser.fetch(args.account, limit=args.limit)
-
     if args.scrape:
         logging.info("Saving image and video links to file")
         with open(os.path.join(args.account, "images.txt"), "w") as f:
@@ -48,3 +47,7 @@ if __name__ == "__main__":
 
         logging.info("Fetched {} image files".format(len(parser.image_urls)))
         logging.info("Fetched {} video files".format(len(parser.video_urls)))
+
+
+if __name__ == "__main__":
+    main()
