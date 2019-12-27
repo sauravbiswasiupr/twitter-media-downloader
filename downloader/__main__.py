@@ -21,7 +21,7 @@ def main():
     args = arg_parser.parse_args()
     if args.threaded:
         logging.info("Using threads to download images and videos")
-        parser = ThreadedTweetParser(64)
+        parser = ThreadedTweetParser(10)
     else:
         parser = BaseTweetParser()
     parser.fetch(args.account, limit=args.limit)
